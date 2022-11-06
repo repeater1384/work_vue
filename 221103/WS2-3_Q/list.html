@@ -53,7 +53,9 @@
             <tbody>
               <tr v-for="(book, idx) in books">
                 <td>{{idx+1}}</td>
-                <td>{{book.isbn}}</td>
+                <td>
+                  <a v-bind:href="'view.html?isbn='+book.isbn">{{book.isbn}}</a>
+                </td>
                 <td>{{book.title}}</td>
                 <td>{{book.author}}</td>
                 <td>{{book.price}}</td>
@@ -72,15 +74,18 @@
         },
         //created:function(){}
         created() {
-          axios.get("/http://localhost:9000/");
+          axios.get("http://localhost:9000/api/books").then((result) => {
+            console.log(result);
+            this.books = result.data;
+          });
         },
       });
       /*
-    books=[
-      { isbn:"1234", author:"1234", title:"제목", price:3000, description:"dd"},
-      {},
-    ]
-    */
+      books=[
+        { isbn:"1234", author:"1234", title:"제목", price:3000, description:"dd"},
+        {},
+      ]
+      */
     </script>
   </body>
 </html>
