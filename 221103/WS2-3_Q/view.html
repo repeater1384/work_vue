@@ -12,6 +12,10 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- axios 모듈 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
 
   <body>
@@ -26,15 +30,15 @@
         <h1 class="underline">SSAFY 도서 정보</h1>
         <div class="regist_form">
           <label for="isbn">도서번호</label>
-          <div class="view"></div>
+          <div class="view">{{book.isbn}}</div>
           <label for="title">도서명</label>
-          <div class="view"></div>
+          <div class="view">{{book.title}}</div>
           <label for="author">저자</label>
-          <div class="view"></div>
+          <div class="view">{{book.author}}</div>
           <label for="price">가격</label>
-          <div class="view"></div>
+          <div class="view">{{book.price}}</div>
           <label for="description">설명</label>
-          <div class="view"></div>
+          <div class="view">{{book.description}}</div>
           <div style="padding-top: 15px">
             <button class="btn btn-warning">수정</button>
             <button class="btn btn-danger">삭제</button>
@@ -43,6 +47,27 @@
         </div>
       </div>
     </div>
-    <script></script>
+    <script>
+      // const params = new URL(document.location).searchParams;
+      // const isbn = params.get("isbn");
+      // console.log(params);
+      // console.log(isbn);
+
+      new Vue({
+        el: "#app",
+        data: {
+          book: 0,
+        },
+        //created:function(){}
+        created() {
+          axios
+            .get(
+              "http://localhost:9000/api/books/" +
+                new URL(document.location).searchParams.get("isbn")
+            )
+            .then((result) => (this.book = result.data));
+        },
+      });
+    </script>
   </body>
 </html>
