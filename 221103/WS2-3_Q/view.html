@@ -47,27 +47,6 @@
         </div>
       </div>
     </div>
-    <script>
-      // const params = new URL(document.location).searchParams;
-      // const isbn = params.get("isbn");
-      // console.log(params);
-      // console.log(isbn);
-
-      new Vue({
-        el: "#app",
-        data: {
-          book: 0,
-        },
-        //created:function(){}
-        created() {
-          axios
-            .get(
-              "http://localhost:9000/api/books/" +
-                new URL(document.location).searchParams.get("isbn")
-            )
-            .then((result) => (this.book = result.data));
-        },
-      });
-    </script>
+    <script></script>
   </body>
 </html>
